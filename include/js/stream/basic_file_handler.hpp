@@ -82,7 +82,6 @@ class BasicFileHandler {
     /// Closes file
     void close() noexcept;
     ///@}
-    
     /**@name settings
      */
     ///@{
@@ -93,7 +92,16 @@ class BasicFileHandler {
     /// Get Filename
     std::string getFilename() noexcept;
     ///@}
+
+    template<class T>
+    friend BasicFileHandler& operator<<(BasicFileHandler&, const T&);
 };
+
+template<class T>
+BasicFileHandler& operator<<(BasicFileHandler& in, const T& t) {
+    in._file << t;
+    return in;
+}
 
 /*
  * Functions implementations
